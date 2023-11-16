@@ -3,6 +3,7 @@ import DashboardLayout from "@/components/ui/dashboard/layout";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import ResultSection from "./ResultSection";
 
 const QueryEditor = () => {
   const [query, setQuery] = useState("SELECT * FROM territories");
