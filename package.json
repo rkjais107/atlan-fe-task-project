@@ -6,12 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "seed": "node -r dotenv/config ./scripts/seed.js",
     "lint": "next lint"
   },
   "dependencies": {
     "@codemirror/lang-sql": "^6.5.4",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/nunito": "^5.0.15",
     "@heroicons/react": "^2.0.18",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/material": "^5.14.18",
     "@uiw/react-codemirror": "^4.21.20",
     "@vercel/postgres": "^0.5.1",
     "axios": "^1.6.2",

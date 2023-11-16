@@ -5,7 +5,7 @@ import { Oval } from "react-loader-spinner";
 const ResultSection = ({ result, resultIsLoading }) => {
   return (
     <div className="result-container">
-      <div className="font-bold text-4xl">Result / Output</div>
+      <div className="font-bold text-4xl">Result</div>
       <div className="loader">
         {resultIsLoading && (
           <Oval

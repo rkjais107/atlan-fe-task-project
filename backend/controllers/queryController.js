@@ -9,12 +9,32 @@ export async function runSQLQuery(req, res) {
     const queryResult = await client.query(query); // Use client.query for parameterized queries
     console.log("Query result:", queryResult.rows);
     client.release();
+    res.status(200).send({
+      message: "Query run successfully!!",
+      queryResult: queryResult.rows,
+    });
+  } catch (error) {
+    console.error("Error running query:", error.message);
+    client.release();
     res
-      .status(200)
-      .send({
-        message: "Query run successfully!!",
-        queryResult: queryResult.rows,
-      });
+      .status(500)
+      .send({ message: "Internal Server Error", error: error.message });
+  }
+}
+
+export async function fetchTableData(req, res) {
+  const { name } = req.query;
+  const query = `SELECT * FROM ${name}`;
+  console.log(query);
+  const client = await sql.connect();
+  try {
+    const queryResult = await client.query(query); // Use client.query for parameterized queries
+    console.log("Query result:", queryResult.rows);
+    client.release();
+    res.status(200).send({
+      message: "Query run successfully!!",
+      queryResult: queryResult.rows,
+    });
   } catch (error) {
     console.error("Error running query:", error.message);
     client.release();
