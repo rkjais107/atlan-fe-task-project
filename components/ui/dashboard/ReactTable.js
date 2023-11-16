@@ -52,7 +52,7 @@ function ReactTable({ queryResult }) {
             <th
               key={index}
               style={{
-                borderBottom: "solid 0.2px #d1d5db",
+                border: "solid 0.2px #d1d5db",
                 background: "#0EA5E9",
                 color: "white",
                 fontWeight: "bold",
@@ -76,7 +76,7 @@ function ReactTable({ queryResult }) {
                 style={{
                   fontSize: "14px",
                   padding: "10px 8px",
-                  borderBottom: "solid 0.2px #d1d5db",
+                  border: "solid 0.2px #d1d5db",
                   background: "#f9fafb",
                 }}
               >

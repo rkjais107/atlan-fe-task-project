@@ -11,6 +11,7 @@ const QueryEditor = () => {
   const [result, setResult] = useState("");
 
   const executeQuery = async (query) => {
+    setResultIsLoading(true);
     if (query === "") {
       toast.custom(
         <div className="customToast">Please enter a query to execute</div>
@@ -43,21 +44,18 @@ const QueryEditor = () => {
     <>
       <DashboardLayout>
         <div>
-          <h1>QueryEditor</h1>
-          <div>
+          <span className="font-bold text-4xl">Query Editor</span>
+          <div className="my-5">
             <Editor
               setQuery={setQuery}
               query={query}
               executeQuery={executeQuery}
+              setResult={setResult}
             />
           </div>
-          <>
-            {result.length !== 0 && (
-              <div className="">
-                <ResultSection result={result} />
-              </div>
-            )}
-          </>
+          <div className="">
+            <ResultSection result={result} resultIsLoading={resultIsLoading} />
+          </div>
         </div>
       </DashboardLayout>
     </>
