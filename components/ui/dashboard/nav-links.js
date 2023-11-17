@@ -3,6 +3,7 @@ import {
   HomeIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -20,6 +21,11 @@ const links = [
     name: "Query Editor",
     href: "/dashboard/query-editor",
     icon: PencilSquareIcon,
+  },
+  {
+    name: "Query Selector",
+    href: "/dashboard/query-selector",
+    icon: QueryBuilderIcon,
   },
 ];
 

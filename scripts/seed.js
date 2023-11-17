@@ -240,16 +240,16 @@ async function seedProducts(client) {
     // Create the "products" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS products (
-        productID VARCHAR(255) NOT NULL,
-        productName VARCHAR(255) NOT NULL,
-        supplierID VARCHAR(255) NOT NULL,
-        categoryID VARCHAR(255) NOT NULL,
-        quantityPerUnit VARCHAR(255) NOT NULL,
-        unitPrice VARCHAR(255) NOT NULL,
-        unitsInStock VARCHAR(255) NOT NULL,
-        unitsOnOrder VARCHAR(255) NOT NULL,
-        reorderLevel VARCHAR(255) NOT NULL,
-        discontinued VARCHAR(255) NOT NULL
+        productID INTEGER,
+        productName VARCHAR(255),
+        supplierID INTEGER,
+        categoryID INTEGER,
+        quantityPerUnit VARCHAR(255),
+        unitPrice NUMERIC(10,2),
+        unitsInStock INTEGER,
+        unitsOnOrder INTEGER,
+        reorderLevel INTEGER,
+        discontinued INTEGER
       );
     `;
 
@@ -479,7 +479,7 @@ async function main() {
   // await seedEmployees(client);
   // await seedOrderDetails(client);
   // await seedOrders(client);
-  // await seedProducts(client);
+  await seedProducts(client);
   // await seedRegions(client);
   // await seedShippers(client);
   // await seedSuppliers(client);

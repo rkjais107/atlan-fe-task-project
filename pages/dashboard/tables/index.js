@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/ui/dashboard/layout";
-import TABLE_NAMES from "@/constants/constants";
+import TABLE_NAMES from "@/constants/tables";
 import React from "react";
 import EastIcon from "@mui/icons-material/East";
 import Link from "next/link";
