@@ -7,6 +7,8 @@ const {
   employee_territories,
 } = require("../lib/json-data/employee_territories");
 const { employees } = require("../lib/json-data/employees");
+const { order_details } = require("../lib/json-data/order_details");
+const { orders } = require("../lib/json-data/orders");
 
 async function seedCategories(client) {
   try {
@@ -140,6 +142,93 @@ async function seedEmployees(client) {
   }
 }
 
+async function seedOrderDetails(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "order_details" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS order_details (
+        orderID VARCHAR(255) NOT NULL,
+        productID VARCHAR(255) NOT NULL,
+        unitPrice VARCHAR(255) NOT NULL,
+        quantity VARCHAR(255) NOT NULL,
+        discount VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "order_details" table`);
+
+    // Insert data into the "order_details" table
+    const insertedOrderDetails = await Promise.all(
+      order_details.map(
+        (orderDetail) => client.sql`
+        INSERT INTO order_details (orderID, productID, unitPrice, quantity, discount)
+        VALUES (${orderDetail.orderID}, ${orderDetail.productID}, ${orderDetail.unitPrice}, ${orderDetail.quantity}, ${orderDetail.discount});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedOrderDetails.length} order_details`);
+
+    return {
+      createTable,
+      order_details: insertedOrderDetails,
+    };
+  } catch (error) {
+    console.error("Error seeding order_details:", error);
+    throw error;
+  }
+}
+
+async function seedOrders(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "orders" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS orders (
+        orderID VARCHAR(255) NOT NULL,
+        customerID VARCHAR(255) NOT NULL,
+        employeeID VARCHAR(255) NOT NULL,
+        orderDate DATE,
+        requiredDate DATE,
+        shippedDate DATE,
+        shipVia VARCHAR(255) NOT NULL,
+        freight VARCHAR(255) NOT NULL,
+        shipName VARCHAR(255) NOT NULL,
+        shipAddress VARCHAR(255) NOT NULL,
+        shipCity VARCHAR(255) NOT NULL,
+        shipRegion VARCHAR(255) NOT NULL,
+        shipPostalCode VARCHAR(255) NOT NULL,
+        shipCountry VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "orders" table`);
+
+    // Insert data into the "orders" table
+    const insertedOrders = await Promise.all(
+      orders.map(
+        (order) => client.sql`
+        INSERT INTO orders (orderID, customerID, employeeID, orderDate, requiredDate, shippedDate, shipVia, freight, shipName, shipAddress, shipCity, shipRegion, shipPostalCode, shipCountry)
+        VALUES (${order.orderID}, ${order.customerID}, ${order.employeeID}, ${order.orderDate}, ${order.requiredDate}, ${order.shippedDate}, ${order.shipVia}, ${order.freight}, ${order.shipName}, ${order.shipAddress}, ${order.shipCity}, ${order.shipRegion}, ${order.shipPostalCode}, ${order.shipCountry});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedOrders.length} orders`);
+
+    return {
+      createTable,
+      orders: insertedOrders,
+    };
+  } catch (error) {
+    console.error("Error seeding orders:", error);
+    throw error;
+  }
+}
+
 async function seedEmployeeTerritories(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -221,6 +310,8 @@ async function main() {
   // await seedCategories(client);
   // await seedCustomers(client);
   // await seedEmployees(client);
+  // await seedOrderDetails(client);
+  // await seedOrders(client);
   // await seedEmployeeTerritories(client);
   // await seedTerritories(client);
 
