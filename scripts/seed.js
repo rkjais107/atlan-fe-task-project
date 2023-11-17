@@ -9,6 +9,10 @@ const {
 const { employees } = require("../lib/json-data/employees");
 const { order_details } = require("../lib/json-data/order_details");
 const { orders } = require("../lib/json-data/orders");
+const { products } = require("../lib/json-data/products");
+const { regions } = require("../lib/json-data/regions");
+const { shippers } = require("../lib/json-data/shippers");
+const { suppliers } = require("../lib/json-data/suppliers");
 
 async function seedCategories(client) {
   try {
@@ -229,6 +233,169 @@ async function seedOrders(client) {
   }
 }
 
+async function seedProducts(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "products" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS products (
+        productID VARCHAR(255) NOT NULL,
+        productName VARCHAR(255) NOT NULL,
+        supplierID VARCHAR(255) NOT NULL,
+        categoryID VARCHAR(255) NOT NULL,
+        quantityPerUnit VARCHAR(255) NOT NULL,
+        unitPrice VARCHAR(255) NOT NULL,
+        unitsInStock VARCHAR(255) NOT NULL,
+        unitsOnOrder VARCHAR(255) NOT NULL,
+        reorderLevel VARCHAR(255) NOT NULL,
+        discontinued VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "products" table`);
+
+    // Insert data into the "products" table
+    const insertedProducts = await Promise.all(
+      products.map(
+        (product) => client.sql`
+        INSERT INTO products (productID, productName, supplierID, categoryID, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued)
+        VALUES (${product.productID}, ${product.productName}, ${product.supplierID}, ${product.categoryID}, ${product.quantityPerUnit}, ${product.unitPrice}, ${product.unitsInStock}, ${product.unitsOnOrder}, ${product.reorderLevel}, ${product.discontinued});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedProducts.length} products`);
+
+    return {
+      createTable,
+      products: insertedProducts,
+    };
+  } catch (error) {
+    console.error("Error seeding products:", error);
+    throw error;
+  }
+}
+
+async function seedRegions(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "regions" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS regions (
+        regionID VARCHAR(255) NOT NULL,
+        regionDescription VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "regions" table`);
+
+    // Insert data into the "regions" table
+    const insertedRegions = await Promise.all(
+      regions.map(
+        (territory) => client.sql`
+        INSERT INTO regions (regionID, regionDescription)
+        VALUES (${territory.regionID}, ${territory.regionDescription});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedRegions.length} regions`);
+
+    return {
+      createTable,
+      regions: insertedRegions,
+    };
+  } catch (error) {
+    console.error("Error seeding regions:", error);
+    throw error;
+  }
+}
+
+async function seedShippers(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "shippers" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS shippers (
+        shipperID VARCHAR(255) NOT NULL,
+        companyName VARCHAR(255) NOT NULL,
+        phone VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "shippers" table`);
+
+    // Insert data into the "shippers" table
+    const insertedShippers = await Promise.all(
+      shippers.map(
+        (shipper) => client.sql`
+        INSERT INTO shippers (shipperID, companyName, phone)
+        VALUES (${shipper.shipperID}, ${shipper.companyName}, ${shipper.phone});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedShippers.length} shippers`);
+
+    return {
+      createTable,
+      shippers: insertedShippers,
+    };
+  } catch (error) {
+    console.error("Error seeding shippers:", error);
+    throw error;
+  }
+}
+
+async function seedSuppliers(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "suppliers" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS suppliers (
+        supplierID VARCHAR(255) NOT NULL,
+        companyName VARCHAR(255) NOT NULL,
+        contactName VARCHAR(255) NOT NULL,
+        contactTitle VARCHAR(255) NOT NULL,
+        address VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        region VARCHAR(255) NOT NULL,
+        postalCode VARCHAR(255) NOT NULL,
+        country VARCHAR(255) NOT NULL,
+        phone VARCHAR(255) NOT NULL,
+        fax VARCHAR(255) NOT NULL,
+        homePage VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "suppliers" table`);
+
+    // Insert data into the "suppliers" table
+    const insertedSuppliers = await Promise.all(
+      suppliers.map(
+        (supplier) => client.sql`
+        INSERT INTO suppliers (supplierID, companyName, contactName, contactTitle, address, city, region, postalCode, country, phone, fax, homePage)
+        VALUES (${supplier.supplierID}, ${supplier.companyName}, ${supplier.contactName}, ${supplier.contactTitle}, ${supplier.address}, ${supplier.city}, ${supplier.region}, ${supplier.postalCode}, ${supplier.country}, ${supplier.phone}, ${supplier.fax}, ${supplier.homePage});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedSuppliers.length} suppliers`);
+
+    return {
+      createTable,
+      suppliers: insertedSuppliers,
+    };
+  } catch (error) {
+    console.error("Error seeding suppliers:", error);
+    throw error;
+  }
+}
+
 async function seedEmployeeTerritories(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -312,6 +479,10 @@ async function main() {
   // await seedEmployees(client);
   // await seedOrderDetails(client);
   // await seedOrders(client);
+  // await seedProducts(client);
+  // await seedRegions(client);
+  // await seedShippers(client);
+  // await seedSuppliers(client);
   // await seedEmployeeTerritories(client);
   // await seedTerritories(client);
 
