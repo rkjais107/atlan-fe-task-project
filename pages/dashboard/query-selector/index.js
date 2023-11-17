@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const QuerySelector = () => {
   const [resultIsLoading, setResultIsLoading] = useState(false);
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState(-1);
 
   const executeQuery = async (query) => {
     setResultIsLoading(true);
@@ -48,17 +48,17 @@ const QuerySelector = () => {
             {Sample_Queries.map((sampleQuery, index) => (
               <div
                 key={index}
-                className="rounded border p-2.5 bg-white flex flex-col justify-between space-y-4"
+                className="rounded border p-5 bg-white flex flex-col justify-between space-y-4"
               >
                 <div className="flex flex-col space-y-2">
                   <span className="font-bold">{sampleQuery.queryName}</span>
-                  <span>
+                  <span className="text-justify">
                     <span className="font-semibold">Description: </span>
                     <span className="text-red-500 font-medium">
                       {sampleQuery.queryDescription}
                     </span>
                   </span>
-                  <span>
+                  <span className="text-justify">
                     <span className="font-semibold">Query: </span>
                     <span className="text-red-500 font-medium">
                       {sampleQuery.query}

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const QueryEditor = () => {
   const [query, setQuery] = useState("SELECT * FROM territories");
   const [resultIsLoading, setResultIsLoading] = useState(false);
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState(-1);
 
   const executeQuery = async (query) => {
     setResultIsLoading(true);

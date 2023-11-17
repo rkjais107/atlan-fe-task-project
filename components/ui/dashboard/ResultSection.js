@@ -19,12 +19,16 @@ const ResultSection = ({ result, resultIsLoading }) => {
         )}
       </div>
       <div className="my-5">
-        {!resultIsLoading && result === "" && (
+        {!resultIsLoading && result === -1 && (
           <div className="">Please execute a query</div>
         )}
 
         {!resultIsLoading && result !== undefined && result.length > 0 && (
           <ReactTable queryResult={result} />
+        )}
+
+        {!resultIsLoading && result !== undefined && result.length === 0 && (
+          <span className="text-red-500 font-semibold">No Rows Found!!</span>
         )}
       </div>
     </div>

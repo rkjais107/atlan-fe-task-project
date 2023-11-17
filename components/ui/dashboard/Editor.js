@@ -19,7 +19,7 @@ const Editor = ({ setQuery, query, executeQuery, setResult }) => {
           onClick={() => {
             setQuery("SELECT * FROM territories");
             setContent("SELECT * FROM territories");
-            setResult("");
+            setResult(-1);
           }}
         >
           Reset
@@ -29,7 +29,7 @@ const Editor = ({ setQuery, query, executeQuery, setResult }) => {
           onClick={() => {
             setQuery("");
             setContent("");
-            setResult("");
+            setResult(-1);
           }}
         >
           Clear
