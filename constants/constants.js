@@ -8,8 +8,8 @@ const TABLE_NAMES = [
   "products",
   "regions",
   "shippers",
-  "supplies",
-  "territories"
+  "suppliers",
+  "territories",
 ];
 
 export default TABLE_NAMES;
