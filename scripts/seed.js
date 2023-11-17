@@ -2,6 +2,11 @@ require("dotenv").config();
 const { db } = require("@vercel/postgres");
 const { territories } = require("../lib/json-data/territories");
 const { categories } = require("../lib/json-data/categories");
+const { customers } = require("../lib/json-data/customers");
+const {
+  employee_territories,
+} = require("../lib/json-data/employee_territories");
+const { employees } = require("../lib/json-data/employees");
 
 async function seedCategories(client) {
   try {
@@ -36,6 +41,139 @@ async function seedCategories(client) {
     };
   } catch (error) {
     console.error("Error seeding categories:", error);
+    throw error;
+  }
+}
+
+async function seedCustomers(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "customers" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS customers (
+        customerID VARCHAR(5) NOT NULL,
+        companyName VARCHAR(255) NOT NULL,
+        contactName VARCHAR(255) NOT NULL,
+        contactTitle VARCHAR(255) NOT NULL,
+        address VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        region VARCHAR(255) NOT NULL,
+        postalCode VARCHAR(255) NOT NULL,
+        country VARCHAR(255) NOT NULL,
+        phone VARCHAR(255) NOT NULL,
+        fax VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "customers" table`);
+
+    // Insert data into the "customers" table
+    const insertedCustomers = await Promise.all(
+      customers.map(
+        (customer) => client.sql`
+        INSERT INTO customers (customerID, companyName, contactName, contactTitle, address, city, region, postalCode, country, phone, fax)
+        VALUES (${customer.customerID}, ${customer.companyName}, ${customer.contactName}, ${customer.contactTitle}, ${customer.address}, ${customer.city}, ${customer.region}, ${customer.postalCode}, ${customer.country}, ${customer.phone}, ${customer.fax});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedCustomers.length} customers`);
+
+    return {
+      createTable,
+      customers: insertedCustomers,
+    };
+  } catch (error) {
+    console.error("Error seeding customers:", error);
+    throw error;
+  }
+}
+
+async function seedEmployees(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "employees" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS employees (
+        employeeID VARCHAR(255) NOT NULL,
+        lastName VARCHAR(255) NOT NULL,
+        firstName VARCHAR(255) NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        titleOfCourtesy VARCHAR(255) NOT NULL,
+        birthDate DATE,
+        hireDate DATE,
+        address VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        region VARCHAR(255) NOT NULL,
+        postalCode VARCHAR(255) NOT NULL,
+        country VARCHAR(255) NOT NULL,
+        homePhone VARCHAR(255) NOT NULL,
+        extension VARCHAR(255) NOT NULL,
+        notes VARCHAR(255) NOT NULL,
+        reportsTo VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "employees" table`);
+
+    // Insert data into the "employees" table
+    const insertedEmployees = await Promise.all(
+      employees.map(
+        (employee) => client.sql`
+        INSERT INTO employees (employeeID, lastName, firstName, title, titleOfCourtesy, birthDate, hireDate, address, city, region, postalCode, country, homePhone, extension, notes, reportsTo)
+        VALUES (${employee.employeeID}, ${employee.lastName}, ${employee.firstName}, ${employee.title}, ${employee.titleOfCourtesy}, ${employee.birthDate}, ${employee.hireDate}, ${employee.address}, ${employee.city}, ${employee.region}, ${employee.postalCode}, ${employee.country}, ${employee.homePhone}, ${employee.extension}, ${employee.notes}, ${employee.reportsTo});
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedEmployees.length} employees`);
+
+    return {
+      createTable,
+      employees: insertedEmployees,
+    };
+  } catch (error) {
+    console.error("Error seeding employees:", error);
+    throw error;
+  }
+}
+
+async function seedEmployeeTerritories(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "employee_territories" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS employee_territories (
+        employeeID VARCHAR(255) NOT NULL,
+        territoryID VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "employee_territories" table`);
+
+    // Insert data into the "employee_territories" table
+    const insertedEmployeeTerritories = await Promise.all(
+      employee_territories.map(
+        (employeeTerritory) => client.sql`
+        INSERT INTO employee_territories (employeeID, territoryID)
+        VALUES (${employeeTerritory.employeeID}, ${employeeTerritory.territoryID});
+      `
+      )
+    );
+
+    console.log(
+      `Seeded ${insertedEmployeeTerritories.length} employee_territories`
+    );
+
+    return {
+      createTable,
+      employee_territories: insertedEmployeeTerritories,
+    };
+  } catch (error) {
+    console.error("Error seeding employee_territories:", error);
     throw error;
   }
 }
@@ -80,7 +218,10 @@ async function seedTerritories(client) {
 async function main() {
   const client = await db.connect();
 
-  await seedCategories(client);
+  // await seedCategories(client);
+  // await seedCustomers(client);
+  // await seedEmployees(client);
+  // await seedEmployeeTerritories(client);
   // await seedTerritories(client);
 
   await client.end();
