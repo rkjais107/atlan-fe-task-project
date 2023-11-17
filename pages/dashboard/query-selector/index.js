@@ -1,7 +1,6 @@
 import ResultSection from "@/components/ui/dashboard/ResultSection";
 import DashboardLayout from "@/components/ui/dashboard/layout";
 import Sample_Queries from "@/constants/sampleQueries";
-import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -67,12 +66,12 @@ const QuerySelector = () => {
                   </span>
                 </div>
                 <div className="flex flex-row justify-end my-2">
-                  <Button
-                    className="bg-green-500 hover:bg-green-200"
+                  <button
+                    className="bg-green-500 hover:bg-green-200 p-2.5 px-4 rounded border"
                     onClick={() => executeQuery(sampleQuery.query)}
                   >
                     <span className="text-black font-semibold">Run</span>
-                  </Button>
+                  </button>
                 </div>
               </div>
             ))}
