@@ -1,8 +1,4 @@
-import {
-  TableCellsIcon,
-  HomeIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { TableCellsIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,7 +7,6 @@ import clsx from "clsx";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: "Home", href: "/dashboard", icon: HomeIcon },
   {
     name: "Tables",
     href: "/dashboard/tables",
