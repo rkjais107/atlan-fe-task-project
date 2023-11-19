@@ -1,3 +1,31 @@
+## List of npm node packages used in this project:
+
+"@codemirror/lang-sql": "^6.5.4",
+"@emotion/react": "^11.11.1",
+"@emotion/styled": "^11.11.0",
+"@fontsource/nunito": "^5.0.15",
+"@heroicons/react": "^2.0.18",
+"@mui/icons-material": "^5.14.18",
+"@mui/material": "^5.14.18",
+"@uiw/react-codemirror": "^4.21.20",
+"@vercel/postgres": "^0.5.1",
+"axios": "^1.6.2",
+"clsx": "^2.0.0",
+"dotenv": "^16.3.1",
+"next": "14.0.2",
+"react": "^18",
+"react-dom": "^18",
+"react-hot-toast": "^2.4.1",
+"react-loader-spinner": "^5.4.5",
+"react-table": "^7.8.0",
+"sass": "^1.69.5"
+
+"autoprefixer": "^10.0.1",
+"eslint": "^8",
+"eslint-config-next": "14.0.2",
+"postcss": "^8",
+"tailwindcss": "^3.3.0"
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
