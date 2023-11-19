@@ -50,5 +50,29 @@ const Sample_Queries = [
     query:
       "SELECT productID, SUM(unitPrice*quantity) as totalSales FROM order_details GROUP BY productID;",
   },
+  {
+    id: 8,
+    queryName: "Find employees who have territories",
+    queryDescription:
+      "Retrieves employee information for those who have territories assigned from the employees and employee_territories tables using a join operation.",
+    query:
+      "SELECT employees.employeeID, employees.firstName, employees.lastName FROM employees INNER JOIN employee_territories ON employees.employeeID = employee_territories.employeeID;",
+  },
+  {
+    id: 9,
+    queryName: "List suppliers and their products",
+    queryDescription:
+      "Retrieves supplier information along with the products they supply from the suppliers and products tables using a join operation.",
+    query:
+      "SELECT suppliers.supplierID, suppliers.companyName, products.productName FROM suppliers INNER JOIN products ON suppliers.supplierID = products.supplierID;",
+  },
+  {
+    id: 10,
+    queryName: "Find the shipper with the most orders",
+    queryDescription:
+      "Identifies the shipper with the highest number of orders from the orders table.",
+    query:
+      "SELECT shipVia, COUNT(*) as orderCount FROM orders GROUP BY shipVia ORDER BY orderCount DESC LIMIT 1;",
+  },
 ];
 export default Sample_Queries;

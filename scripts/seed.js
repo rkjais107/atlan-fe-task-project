@@ -103,22 +103,22 @@ async function seedEmployees(client) {
     // Create the "employees" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS employees (
-        employeeID VARCHAR(255) NOT NULL,
-        lastName VARCHAR(255) NOT NULL,
-        firstName VARCHAR(255) NOT NULL,
-        title VARCHAR(255) NOT NULL,
-        titleOfCourtesy VARCHAR(255) NOT NULL,
+        employeeID INTEGER,
+        lastName VARCHAR(255),
+        firstName VARCHAR(255),
+        title VARCHAR(255),
+        titleOfCourtesy VARCHAR(255),
         birthDate DATE,
         hireDate DATE,
-        address VARCHAR(255) NOT NULL,
-        city VARCHAR(255) NOT NULL,
-        region VARCHAR(255) NOT NULL,
-        postalCode VARCHAR(255) NOT NULL,
-        country VARCHAR(255) NOT NULL,
-        homePhone VARCHAR(255) NOT NULL,
-        extension VARCHAR(255) NOT NULL,
-        notes VARCHAR(255) NOT NULL,
-        reportsTo VARCHAR(255) NOT NULL
+        address VARCHAR(255),
+        city VARCHAR(255),
+        region VARCHAR(255),
+        postalCode VARCHAR(255),
+        country VARCHAR(255),
+        homePhone VARCHAR(255),
+        extension INTEGER,
+        notes VARCHAR(255),
+        reportsTo INTEGER
       );
     `;
 
@@ -357,18 +357,18 @@ async function seedSuppliers(client) {
     // Create the "suppliers" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS suppliers (
-        supplierID VARCHAR(255) NOT NULL,
-        companyName VARCHAR(255) NOT NULL,
-        contactName VARCHAR(255) NOT NULL,
-        contactTitle VARCHAR(255) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        city VARCHAR(255) NOT NULL,
-        region VARCHAR(255) NOT NULL,
-        postalCode VARCHAR(255) NOT NULL,
-        country VARCHAR(255) NOT NULL,
-        phone VARCHAR(255) NOT NULL,
-        fax VARCHAR(255) NOT NULL,
-        homePage VARCHAR(255) NOT NULL
+        supplierID INTEGER,
+        companyName VARCHAR(255),
+        contactName VARCHAR(255),
+        contactTitle VARCHAR(255),
+        address VARCHAR(255),
+        city VARCHAR(255),
+        region VARCHAR(255),
+        postalCode VARCHAR(255),
+        country VARCHAR(255),
+        phone VARCHAR(255),
+        fax VARCHAR(255),
+        homePage VARCHAR(255)
       );
     `;
 
@@ -477,7 +477,7 @@ async function main() {
   // await seedCategories(client);
   // await seedCustomers(client);
   // await seedEmployees(client);
-  await seedOrderDetails(client);
+  // await seedOrderDetails(client);
   // await seedOrders(client);
   // await seedProducts(client);
   // await seedRegions(client);
