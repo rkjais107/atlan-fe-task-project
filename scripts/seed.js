@@ -21,9 +21,9 @@ async function seedCategories(client) {
     // Create the "categories" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS categories (
-        categoryID VARCHAR(255) NOT NULL,
-        categoryName VARCHAR(255) NOT NULL,
-        description VARCHAR(255) NOT NULL
+        categoryID INTEGER,
+        categoryName VARCHAR(255),
+        description VARCHAR(255)
       );
     `;
 

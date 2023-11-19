@@ -11,6 +11,7 @@ const QuerySelector = () => {
 
   const executeQuery = async (query) => {
     setResultIsLoading(true);
+    setResult(-1);
     if (query === "") {
       toast.custom(
         <div className="customToast">Please enter a query to execute</div>

@@ -74,5 +74,21 @@ const Sample_Queries = [
     query:
       "SELECT shipVia, COUNT(*) as orderCount FROM orders GROUP BY shipVia ORDER BY orderCount DESC LIMIT 1;",
   },
+  {
+    id: 11,
+    queryName: "Retrieve customers from a specific country",
+    queryDescription:
+      "Retrieves customer records from a specific country (e.g., USA) from the customers table.",
+    query: "SELECT * FROM customers WHERE country = 'USA';",
+  },
+  {
+    id: 12,
+    queryName: "List products and their categories",
+    queryDescription:
+      "Retrieves product names along with their associated categories from the products and categories tables using a join operation.",
+    query:
+      "SELECT products.productName, categories.categoryName FROM products INNER JOIN categories ON products.categoryID = categories.categoryID;",
+  },
 ];
+
 export default Sample_Queries;
