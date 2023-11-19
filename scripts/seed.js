@@ -153,11 +153,11 @@ async function seedOrderDetails(client) {
     // Create the "order_details" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS order_details (
-        orderID VARCHAR(255) NOT NULL,
-        productID VARCHAR(255) NOT NULL,
-        unitPrice VARCHAR(255) NOT NULL,
-        quantity VARCHAR(255) NOT NULL,
-        discount VARCHAR(255) NOT NULL
+        orderID INTEGER,
+        productID INTEGER,
+        unitPrice NUMERIC(10,2),
+        quantity INTEGER,
+        discount NUMERIC(10,2)
       );
     `;
 
@@ -192,20 +192,20 @@ async function seedOrders(client) {
     // Create the "orders" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS orders (
-        orderID VARCHAR(255) NOT NULL,
-        customerID VARCHAR(255) NOT NULL,
-        employeeID VARCHAR(255) NOT NULL,
+        orderID INTEGER,
+        customerID VARCHAR(255),
+        employeeID INTEGER,
         orderDate DATE,
         requiredDate DATE,
         shippedDate DATE,
-        shipVia VARCHAR(255) NOT NULL,
-        freight VARCHAR(255) NOT NULL,
-        shipName VARCHAR(255) NOT NULL,
-        shipAddress VARCHAR(255) NOT NULL,
-        shipCity VARCHAR(255) NOT NULL,
-        shipRegion VARCHAR(255) NOT NULL,
-        shipPostalCode VARCHAR(255) NOT NULL,
-        shipCountry VARCHAR(255) NOT NULL
+        shipVia INTEGER,
+        freight NUMERIC(10,2),
+        shipName VARCHAR(255),
+        shipAddress VARCHAR(255),
+        shipCity VARCHAR(255),
+        shipRegion VARCHAR(255),
+        shipPostalCode VARCHAR(255),
+        shipCountry VARCHAR(255)
       );
     `;
 
@@ -403,8 +403,8 @@ async function seedEmployeeTerritories(client) {
     // Create the "employee_territories" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS employee_territories (
-        employeeID VARCHAR(255) NOT NULL,
-        territoryID VARCHAR(255) NOT NULL
+        employeeID INTEGER,
+        territoryID VARCHAR(255)
       );
     `;
 
@@ -441,9 +441,9 @@ async function seedTerritories(client) {
     // Create the "territories" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS territories (
-        territoryID VARCHAR(255) NOT NULL,
-        territoryDescription VARCHAR(255) NOT NULL,
-        regionID VARCHAR(255) NOT NULL
+        territoryID VARCHAR(255),
+        territoryDescription VARCHAR(255),
+        regionID INTEGER
       );
     `;
 
@@ -477,9 +477,9 @@ async function main() {
   // await seedCategories(client);
   // await seedCustomers(client);
   // await seedEmployees(client);
-  // await seedOrderDetails(client);
+  await seedOrderDetails(client);
   // await seedOrders(client);
-  await seedProducts(client);
+  // await seedProducts(client);
   // await seedRegions(client);
   // await seedShippers(client);
   // await seedSuppliers(client);

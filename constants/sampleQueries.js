@@ -34,5 +34,21 @@ const Sample_Queries = [
       "Calculates the average unit price of products from the products table.",
     query: "SELECT AVG(unitPrice) as averagePrice FROM products;",
   },
+  {
+    id: 6,
+    queryName: "List customers and their orders",
+    queryDescription:
+      "Retrieves customer information along with their associated orders from the customers and orders tables using a join operation.",
+    query:
+      "SELECT customers.customerID, customers.companyName, orders.orderID FROM customers INNER JOIN orders ON customers.customerID = orders.customerID;",
+  },
+  {
+    id: 7,
+    queryName: "Find the total sales for each product",
+    queryDescription:
+      "Calculates the total sales for each product by multiplying the unit price with the quantity from the order_details table.",
+    query:
+      "SELECT productID, SUM(unitPrice*quantity) as totalSales FROM order_details GROUP BY productID;",
+  },
 ];
 export default Sample_Queries;
