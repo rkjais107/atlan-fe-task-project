@@ -58,17 +58,17 @@ async function seedCustomers(client) {
     // Create the "customers" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS customers (
-        customerID VARCHAR(5) NOT NULL,
-        companyName VARCHAR(255) NOT NULL,
-        contactName VARCHAR(255) NOT NULL,
-        contactTitle VARCHAR(255) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        city VARCHAR(255) NOT NULL,
-        region VARCHAR(255) NOT NULL,
-        postalCode VARCHAR(255) NOT NULL,
-        country VARCHAR(255) NOT NULL,
-        phone VARCHAR(255) NOT NULL,
-        fax VARCHAR(255) NOT NULL
+        customerID VARCHAR(7),
+        companyName VARCHAR(255),
+        contactName VARCHAR(255),
+        contactTitle VARCHAR(255),
+        address VARCHAR(255),
+        city VARCHAR(255),
+        region VARCHAR(255),
+        postalCode VARCHAR(255),
+        country VARCHAR(255),
+        phone VARCHAR(255),
+        fax VARCHAR(255)
       );
     `;
 
@@ -284,8 +284,8 @@ async function seedRegions(client) {
     // Create the "regions" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS regions (
-        regionID VARCHAR(255) NOT NULL,
-        regionDescription VARCHAR(255) NOT NULL
+        regionID INTEGER,
+        regionDescription VARCHAR(255)
       );
     `;
 
@@ -320,9 +320,9 @@ async function seedShippers(client) {
     // Create the "shippers" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS shippers (
-        shipperID VARCHAR(255) NOT NULL,
-        companyName VARCHAR(255) NOT NULL,
-        phone VARCHAR(255) NOT NULL
+        shipperID INTEGER,
+        companyName VARCHAR(255),
+        phone VARCHAR(255)
       );
     `;
 
