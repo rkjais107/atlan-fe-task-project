@@ -12,6 +12,16 @@ This project is a web-based SQL query execution application developed using Reac
 Initial Load Time: Measured using browser developer tools.
 Re-render Time: Recorded during and after query execution.
 
+# Measuring Page Load Time:
+**1. Using Browser Developer Tools:**
+
+      Open your application in a web browser.
+      Right-click on the page, select "Inspect" to open Developer Tools.
+      Navigate to the "Network" tab.
+      Reload the page (Ctrl + R or Cmd + R).
+      Look for the timing information, especially "DOMContentLoaded" and "load" events in the "Timing" section. The "load" event represents the overall page load time.
+
+
 ## List of npm node packages used in this project:
 
 "@codemirror/lang-sql": "^6.5.4",
