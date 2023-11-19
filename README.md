@@ -3,14 +3,14 @@
 atlan-fe-task-project
 
 ## Technology Stack:
-# Framework: React Next JS
+Framework: React Next JS
 
 ## Description:
 This project is a web-based SQL query execution application developed using React. It provides users with a platform to input and execute SQL queries, displaying the results in a structured format. The application supports multiple predefined queries, each accompanied by its corresponding table of data.
 
 ## Performance Metrics:
-# Initial Load Time: Measured using browser developer tools.
-# Re-render Time: Recorded during and after query execution.
+Initial Load Time: Measured using browser developer tools.
+Re-render Time: Recorded during and after query execution.
 
 ## List of npm node packages used in this project:
 
